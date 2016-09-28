@@ -1,50 +1,53 @@
-package com.jobInventions;
+import javax.swing.JOptionPane;
 
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-
-@SuppressWarnings("serial")
-public class ToDoReminder extends JFrame implements FocusListener {
-	JButton check, smallRed, bigGreen, BigRed;
-	JTextField reminder;
+public class ToDoReminder {
 	
-
-	public ToDoReminder() {
-		super ("This is my List");
-		setSize(500, 800);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLookAndFeel();
-		FlowLayout flow = new FlowLayout();
-		setLayout(flow);
-		setVisible(true);
-	}
 	
-	public void focusGained(FocusEvent event){
-
-	}
 	
-	public void focusLost(FocusEvent event){
-		focusGained(event);
-	}
-
-	
-	private void setLookAndFeel()
-	{
-		try{
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-				SwingUtilities.updateComponentTreeUI(this);
-			}
-		catch(Exception e)
-		{
-			System.err.println("Couldn't use the system look and Feel: " + e);
+	public static void main (String[] args){
+		String[] toDoList = new String[100];
+		String[] reminder = new String[100];
+		String choice;
+		char fxn = 't';
+		choice = JOptionPane.showInputDialog("A task or reminder?");
+		if(choice.equals("task") || choice.equals("Task")){
+			//JOptionPane.showMessageDialog(null, "Task");
+			fxn = 't';
+			//JOptionPane.showMessageDialog(null, fxn);
+		}else if(choice.equals("reminder") || choice.equals("Reminder")){
+			//JOptionPane.showMessageDialog(null, "Reminder");
+			fxn = 'r';
+			//JOptionPane.showMessageDialog(null, fxn);
+		}else{
+			JOptionPane.showMessageDialog(null, "The options are task or reminder");
 		}
-	}
-
+		
+		JOptionPane.showMessageDialog(null, fxn);
+		
+		int i = 0;
+		while(fxn =='t'){
+			
+			toDoList[i] = JOptionPane.showInputDialog("What task do you need to work on?");
+			
+		}
+		while(fxn =='r'){
+			
+			reminder[i] = JOptionPane.showInputDialog("What is it do you need to be reminded about?");
+			
+		}
+		
+		JOptionPane.showMessageDialog(null, "These are the tasks for today: " );
+		for(int z = 0; z < i ; z ++){
+			JOptionPane.showMessageDialog(null, toDoList[z] );
+		}
+		
+		JOptionPane.showMessageDialog(null, "These are the reminders for today: " );
+		for(int z = 0; z < i ; z ++){
+			JOptionPane.showMessageDialog(null, toDoList[z] );
+			
+		}
+		
+		
 	
-	@SuppressWarnings("unused")
-	public static void main(String[] args) {
-		ToDoReminder frame = new ToDoReminder();
 	}
-
 }
