@@ -1,0 +1,179 @@
+import javax.swing.JOptionPane;
+
+public class ToDoReminder {
+
+	public ToDoReminder() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		ToDoReminder program = new ToDoReminder();
+		String[] toDoList = new String[100];		//This is the List of tasks that need to be worked on
+		String[] reminder = new String[100];		//This is the list of reminders
+		String choice;								//Which one do you choose
+		String answer;								//Yes or No Questions
+
+		//This start off question to choose a task or reminder
+		choice = JOptionPane.showInputDialog("A task or reminder?");
+		
+		//if-else if - else statement for the response of choice
+		if (choice.equals("task") || choice.equals("Task")) {
+			toDoList = program.tasks();								// Calls the tasks method
+		} else if (choice.equals("reminder") || choice.equals("Reminder")) {
+			reminder = program.memos();								// Calls the memos method
+		} else {
+			//Choice was not one of the following: Task, task , Reminder or reminder
+			JOptionPane.showMessageDialog(null, "The options are task or reminder");	
+		}		
+			//If task was selected first then program will ask if there needs to be a reminder as well
+		if (choice.equals("task") || choice.equals("Task")) {
+			answer = JOptionPane.showInputDialog("Are there any reminders that you need to be reminded of? Yes or No");
+			if (answer.equals("Yes") || answer.equals("yes")) {
+				reminder = program.memos();
+				
+				//This is the complete list of tasks and reminders for the day
+				JOptionPane.showMessageDialog(null, "These are the tasks for today: ");
+				for (int z = 0; z <= toDoList.length; z++) {
+					JOptionPane.showMessageDialog(null, toDoList[z]);
+					if(toDoList[z+1] != null){
+						continue;
+					}else{
+						break;
+					}
+				}
+				
+				if(reminder[0]!= null){
+					
+				
+					JOptionPane.showMessageDialog(null, "These are the reminders for today: ");
+					for (int z = 0; z <= reminder.length; z++) {
+						JOptionPane.showMessageDialog(null, reminder[z]);
+						if(reminder[z+1] == null){
+							break;
+						}
+					}
+				}
+				
+			} else {
+				
+				//This is the complete list of just tasks for the day
+				JOptionPane.showMessageDialog(null, "These are the tasks for today: ");
+				for (int z = 0; z <= toDoList.length; z++) {
+					JOptionPane.showMessageDialog(null, toDoList[z]);
+					if(toDoList[z+1] != null){
+						continue;
+					}else{
+						break;
+					}
+				}
+				
+				if(reminder[0]!= null){
+					JOptionPane.showMessageDialog(null, "These are the reminders for today: ");
+				
+					for (int z = 0; z <= reminder.length; z++) {
+						JOptionPane.showMessageDialog(null, reminder[z]);
+						if(reminder[z+1] == null){
+							break;
+						}
+					}
+				}
+
+			}
+			
+			//If the choice was reminder first, then the programs will ask if there are any tasks as well
+		} else if (choice.equals("reminder") || choice.equals("Reminder")) {
+			answer = JOptionPane.showInputDialog("Are there any tesks that you need to be doing? Yes or No");
+			
+			if (answer.equals("Yes") || answer.equals("yes")) {
+				toDoList = program.tasks();
+				
+				//The complete list of reminders and tasks of the day
+				JOptionPane.showMessageDialog(null, "These are the reminders for today: ");
+				for (int z = 0; z <= reminder.length; z++) {
+					JOptionPane.showMessageDialog(null, reminder[z]);
+					if(reminder[z+1] == null){
+						break;
+					}
+				}
+
+				if(toDoList[0] != null){
+					JOptionPane.showMessageDialog(null, "These are the tasks for today: ");
+					for (int z = 0; z <= toDoList.length; z++) {
+						JOptionPane.showMessageDialog(null, toDoList[z]);
+						if(toDoList[z+1] == null){
+							break;
+						}
+					}
+				}
+			}
+		}else {
+			
+			//The complete list of reminders of the day
+			JOptionPane.showMessageDialog(null, "These are the reminders for today: ");
+			for (int z = 0; z <= reminder.length; z++) {
+				JOptionPane.showMessageDialog(null, reminder[z]);
+				if(reminder[z+1] == null){
+					break;
+				}
+			}
+
+			if(toDoList[0] != null){
+				JOptionPane.showMessageDialog(null, "These are the tasks for today: ");
+				for (int z = 0; z <= toDoList.length; z++) {
+					JOptionPane.showMessageDialog(null, toDoList[z]);
+					if(toDoList[z+1] == null){
+						break;
+					}
+				}
+			}
+		}
+
+	}
+
+	//This is the method that is called by toDolist String[] 
+	public String[] tasks(){
+		String[] task = new String[100];
+		String answer = "yes";
+		int i = 0;
+		while (answer.equals("yes")) {
+
+			task[i] = JOptionPane.showInputDialog("What task do you need to work on?");
+			answer = JOptionPane.showInputDialog("Are there more tasks? Yes or No");
+			if (answer.equals("Yes") || answer.equals("yes")) {
+				i++;
+				task[i] = JOptionPane.showInputDialog("What task do you need to work on?");
+				answer = JOptionPane.showInputDialog("Are ther more tasks? Yes or No");
+				i++;
+				if (answer.equals("No") || answer.equals("no")) {
+					break;
+				}
+			} else
+				break;
+
+		}
+		return task;
+	}
+
+	//This is the method that is called by the reminders String[]
+	public String[] memos(){
+		String[] memo = new String[100];
+		String answer = "yes";
+		int i = 0;
+		while (answer.equals("yes")) {
+			memo[i] = JOptionPane.showInputDialog("What do you need to be reminded of?");
+			answer = JOptionPane.showInputDialog("Are there anything else to be reminded of? Yes or No");
+			if (answer.equals("Yes") || answer.equals("yes")) {
+				i++;
+				memo[i] = JOptionPane.showInputDialog("What do you need to be reminded of?");
+				answer = JOptionPane.showInputDialog("Are there anything else to be reminded of? Yes or No");
+				i++;
+				if (answer.equals("No") || answer.equals("no")) {
+					break;
+				}
+			} else
+				break;
+		}
+
+		return memo;
+	}
+}
